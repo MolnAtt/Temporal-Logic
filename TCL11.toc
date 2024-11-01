@@ -1,0 +1,8 @@
+\beamer@endinputifotherversion {3.27pt}
+\beamer@sectionintoc {1}{Intro}{2}{0}{1}
+\beamer@sectionintoc {2}{Language}{4}{0}{2}
+\beamer@sectionintoc {3}{Models}{15}{0}{3}
+\beamer@sectionintoc {4}{Axiomatization}{21}{0}{4}
+\beamer@sectionintoc {5}{Canonical clock models}{26}{0}{5}
+\beamer@sectionintoc {6}{Completeness}{45}{0}{6}
+\beamer@sectionintoc {7}{Truth Lemma}{54}{0}{7}

@@ -1,0 +1,7 @@
+\beamer@endinputifotherversion {3.27pt}
+\beamer@sectionintoc {1}{Trees}{2}{0}{1}
+\beamer@sectionintoc {2}{Ockhamist}{18}{0}{2}
+\beamer@sectionintoc {3}{Peircean}{24}{0}{3}
+\beamer@sectionintoc {4}{Leibnizian}{39}{0}{4}
+\beamer@sectionintoc {5}{Thomason}{55}{0}{5}
+\beamer@sectionintoc {6}{{\L }ukasiewitz?}{67}{0}{6}

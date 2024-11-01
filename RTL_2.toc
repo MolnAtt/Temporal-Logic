@@ -1,0 +1,8 @@
+\beamer@endinputifotherversion {3.36pt}
+\beamer@sectionintoc {1}{Definability}{2}{0}{1}
+\beamer@sectionintoc {2}{Completeness}{18}{0}{2}
+\beamer@sectionintoc {3}{Logics}{55}{0}{3}
+\beamer@sectionintoc {4}{Summary}{59}{0}{4}
+\beamer@sectionintoc {5}{Point-generation}{72}{0}{5}
+\beamer@sectionintoc {6}{Unraveling}{79}{0}{6}
+\beamer@sectionintoc {7}{Bulldozing}{94}{0}{7}

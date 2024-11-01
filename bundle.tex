@@ -1,0 +1,54 @@
+\begin{tikzpicture}[>=stealth, scale=.6,
+world/.style={inner sep=.4mm, fill=black, circle},
+intension/.style={fill=black, fill opacity=.1},
+altrel/.style={->}]
+
+
+%%%%%% SETTINGS %%%%%%%%%%
+
+\pgfmathtruncatemacro{\gridwidth}{8}
+\pgfmathtruncatemacro{\gridheight}{10}
+
+%%%%%% RAJZ %%%%%%%%%%
+
+\draw [help lines, step=1cm] (0,0) node (v1) {} grid (\gridwidth,\gridheight);
+
+\foreach \i in {0, ..., \gridwidth}{\node [anchor=north] at (\i, 0) {\i};}
+\foreach \i in {1, ..., \gridheight}{\node [anchor=east] at (0,\i) {\i};}
+
+%\pause %%%%%%%%%%%% PAUSE %%%%%%%%%%%%%
+%\pause %%%%%%%%%%%% PAUSE %%%%%%%%%%%%%
+
+
+\begin{scope}[blue, line width=1mm, opacity=.2]
+\draw  plot[smooth, tension=.7] coordinates {(v1)  (0,10) };
+\draw  plot[smooth, tension=.7] coordinates {(v1) (1,0) (1,1) (1,10) };
+\draw  plot[smooth, tension=.7] coordinates {(v1) (1,0) (1,1) (2,1) (2,2) (2,10) };
+\draw  plot[smooth, tension=.7] coordinates {(v1) (1,0) (1,1) (2,1) (2,2) (3,2) (3,3) (3,10) };
+\draw  plot[smooth, tension=.7] coordinates {(v1) (1,0) (1,1) (2,1) (2,2) (3,2) (3,3) (4,3) (4,4) (4,10) };
+\draw  plot[smooth, tension=.7] coordinates {(v1) (1,0) (1,1) (2,1) (2,2) (3,2) (3,3) (4,3) (4,4) (5,4) (5,5) (5,10) };
+\draw  plot[smooth, tension=.7] coordinates {(v1) (1,0) (1,1) (2,1) (2,2) (3,2) (3,3) (4,3) (4,4) (5,4) (5,5) (6, 5) (6,6) (6,10) };
+\draw  plot[smooth, tension=.7] coordinates {(v1) (1,0) (1,1) (2,1) (2,2) (3,2) (3,3) (4,3) (4,4) (5,4) (5,5) (6, 5) (6,6) (7,6) (7,7) (7,10) };
+\draw  plot[smooth, tension=.7] coordinates {(v1) (1,0) (1,1) (2,1) (2,2) (3,2) (3,3) (4,3) (4,4) (5,4) (5,5) (6, 5) (6,6) (7,6) (7,7) (8,7) (8,8) (8,10) };
+\end{scope}
+
+
+%\pause %%%%%%%%%%%% PAUSE %%%%%%%%%%%%%
+
+\node at (-5.5,5) {
+\begin{minipage}{5cm}\scriptsize
+%    infinite zigzags: \\ \hfill $\langle R,U,R,U, \dots,\rangle$
+ finite zigzags: \\ \hfill $\langle R,U,R,U, \dots, R,U\rangle$
+\\ infinite columns: \\ \hfill $\langle U,U,U,U, \dots,\rangle$
+\\ $W$: finite routes
+\\ $R$: continuation
+\\ $B= \left\{ w\oplus v: \begin{array}{l}w \textup{ fin. route}, \\ v \textup{ inf. column} \end{array}\right\}$
+\\ $V(p)$: the finite zigzags
+\\ life on Earth $\leftrightsquigarrow$ zigzagging
+\\ $\Box (p\to \underline {\mathbf F} \mathbf G\lnot p)$ $\leftrightsquigarrow$ in every history, sooner or later life (zigzags) will permanently end
+\\ $p\to \Diamond \mathbf F p$ $\leftrightsquigarrow$ one more day of life (zigzag) is always possible
+\\ \textcolor{red}{The Ockhamist will find the infinite zigzag, which refutes 
+\[(p\to \underline {\mathbf F} \mathbf G\lnot p)\]
+But the Bundle-treehugger won't.}
+\end{minipage}};
+\end{tikzpicture}

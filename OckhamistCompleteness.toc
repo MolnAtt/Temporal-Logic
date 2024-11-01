@@ -1,0 +1,5 @@
+\beamer@endinputifotherversion {3.27pt}
+\beamer@sectionintoc {1}{Ockhamist axioms}{1}{0}{1}
+\beamer@sectionintoc {2}{IRR theories}{9}{0}{2}
+\beamer@sectionintoc {3}{Irr. can. submodel}{25}{0}{3}
+\beamer@sectionintoc {4}{Maximalizing Histories}{43}{0}{4}

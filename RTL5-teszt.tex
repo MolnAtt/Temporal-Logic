@@ -1,0 +1,446 @@
+    \documentclass[xcolor=x11names]{beamer}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  This Beamer template was created by Cameron Bracken.
+%%  Anyone can freely use or modify it for any purpose
+%%  without attribution.
+%%
+%%  Last Modified by C. Bracken: January 9, 2009
+%%
+%%  The preamble, and maybe some modification of the Cameron Bracken's template is due to Attila Molnár.
+%%
+%%
+
+%% General document
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{decorations.fractals}
+\usetikzlibrary{decorations.text}
+\usepgflibrary{arrows}
+\usetikzlibrary{fadings}
+\usetikzlibrary[decorations.pathmorphing]
+\tikzfading[name=fade inside, inner color=transparent!70, outer color=transparent!70]
+\usetikzlibrary{calc}
+\usetikzlibrary{intersections}
+\usetikzlibrary{shapes}
+\usetikzlibrary{patterns}
+\usefonttheme{serif}
+\usepackage{amssymb} 			
+\usepackage{amsmath}
+\usepackage{ifthen}
+\usepackage[normalem]{ulem}
+\usepackage{mathrsfs}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Beamer Layout %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\useoutertheme[subsection=false,shadow]{miniframes}
+\useinnertheme{default}
+\usefonttheme{serif}
+%\usepackage{txfonts} %Hook for strict implication!
+\DeclareSymbolFont{symbolsC}{U}{txsyc}{m}{n}
+\DeclareMathSymbol{\strictif}{\mathrel}{symbolsC}{74}
+\DeclareMathSymbol{\boxright}{\mathrel}{symbolsC}{128}
+\usepackage{palatino}
+%\usepackage[uppercase=upright,charter]{mathdesign}
+
+\setbeamerfont{title like}{shape=\scshape}
+\setbeamerfont{frametitle}{shape=\scshape}
+
+
+\setbeamercolor*{lower separation line head}{bg=white!40!DeepSkyBlue3}
+\setbeamercolor*{normal text}{fg=black,bg=white}
+\setbeamercolor*{alerted text}{fg=red}
+\setbeamercolor*{example text}{fg=black}
+\setbeamercolor*{structure}{fg=black}
+
+\setbeamercolor*{palette tertiary}{fg=black,bg=white!90!DeepSkyBlue3}
+\setbeamercolor*{palette quaternary}{fg=black,bg=black!10}
+
+%\setbeamercolor{block body alerted}{bg=normal text.bg!90!DeepSkyBlue4}
+\setbeamercolor{block body}{bg=normal text.bg!95!DeepSkyBlue3}
+%\setbeamercolor{block body example}{bg=normal text.bg!90!DeepSkyBlue4}
+%\setbeamercolor{block title alerted}{use={normal text,alerted text},fg=alerted text.fg!75!normal text.fg,bg=normal text.bg!90!DeepSkyBlue4}
+\setbeamercolor{block title}{bg=normal text.bg!70!DeepSkyBlue3}
+%\setbeamercolor{block title example}{use={normal text,example text},fg=example text.fg!75!normal text.fg,bg=normal text.bg!75!DeepSkyBlue4}
+
+\setbeamertemplate{blocks}[rounded][shadow=true]
+%\setbeamertemplate{background canvas}[vertical shading][bottom=white,top=structure.fg!25]
+%\setbeamertemplate{sidebar canvas left}[horizontal shading][left=white!40!black,right=black]
+\setbeamertemplate{itemize items}[circle]
+\setbeamercolor*{itemize item}{fg=DeepSkyBlue3}
+\setbeamercolor*{itemize subitem}{fg=DeepSkyBlue3}
+\setbeamercolor*{itemize subsubitem}{fg=DeepSkyBlue3}
+\setbeamertemplate{enumerate items}[circle]
+%\setbeamercolor{item projected}{bg=DeepSkyBlue3,fg=black}
+\setbeamercolor{item projected}{bg=white,fg=DeepSkyBlue3}
+\setbeamercolor*{enumerate item}{fg=DeepSkyBlue3}
+\setbeamercolor*{enumerate subitem}{fg=DeepSkyBlue3}
+\setbeamercolor*{enumerate subsubitem}{fg=DeepSkyBlue3}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newenvironment{defi}[1][]{\begin{block}{\footnotesize \textsc{Definition} \ifthenelse{\equal{#1}{}}{}{\, (#1)}}}{\end{block}}
+\newenvironment{prop}[1][]{\begin{block}{\footnotesize \textsc{Proposition} \ifthenelse{\equal{#1}{}}{}{\, (\textsc{#1})}}}{\end{block}}
+\newenvironment{lemm}[1][]{\begin{block}{\footnotesize \textsc{Lemma} \ifthenelse{\equal{#1}{}}{}{\, (\textsc{#1})}}}{\end{block}}
+\newenvironment{idea}[1][]{\begin{block}{\footnotesize \textsc{Idea} \ifthenelse{\equal{#1}{}}{}{\, (\textsc{#1})}}}{\end{block}}
+\newenvironment{rema}[1][]{\begin{block}{\footnotesize \textsc{Remark} \ifthenelse{\equal{#1}{}}{}{\, (\textsc{#1})}}}{\end{block}}
+\newenvironment{coro}[1][]{\begin{block}{\footnotesize \textsc{Corollary} \ifthenelse{\equal{#1}{}}{}{\, (\textsc{#1})}}}{\end{block}}
+\newenvironment{tete}[1][]{\begin{block}{\footnotesize \textsc{Theorem} \ifthenelse{\equal{#1}{}}{}{\, (\textsc{#1})}}}{\end{block}}
+\newenvironment{claim}[1][]{\begin{block}{Claim \ifthenelse{\equal{#1}{}}{}{\, (\textsc{#1})}}}{\end{block}}
+%\newenvironment{lemma}[1][]{\begin{block}{Lemma \ifthenelse{\equal{#1}{}}{}{\, (\textsc{#1})}}}{\end{block}}
+\newenvironment{question}[1][]{\begin{block}{Question \ifthenelse{\equal{#1}{}}{}{\, (\textsc{#1})}}}{\end{block}}
+\newenvironment{rem}[1][]{\begin{block}{Remark \ifthenelse{\equal{#1}{}}{}{\, (\textsc{#1})}}}{\end{block}}
+\newenvironment{homework}[1][]{\begin{block}{Homework \ifthenelse{\equal{#1}{}}{}{\, (\textsc{#1})}}}{\end{block}}
+\newenvironment{proo}[1][]{\begin{block}{\footnotesize \textsc{Proof} \ifthenelse{\equal{#1}{}}{}{\, (\textsc{#1})}}}{\end{block}}
+
+%%%%%%%%%%%%%%%%%%%%%
+%% To evade unnecessary circles, mainly for \cimdia
+%%%%%%%%%%%%%%%%%%%%%
+
+\makeatletter
+\let\beamer@writeslidentry@miniframeson=\beamer@writeslidentry
+\def\beamer@writeslidentry@miniframesoff{%
+  \expandafter\beamer@ifempty\expandafter{\beamer@framestartpage}{}% does not happen normally
+  {%else
+    % removed \addtocontents commands
+    \clearpage\beamer@notesactions%
+  }
+}
+\newcommand*{\miniframeson}{\let\beamer@writeslidentry=\beamer@writeslidentry@miniframeson}
+\newcommand*{\miniframesoff}{\let\beamer@writeslidentry=\beamer@writeslidentry@miniframesoff}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%% END %%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%% Formatting Commands
+
+\newcommand{\cimdia}[1] {\miniframesoff \begin{frame}\begin{center}\huge \begin{tabular}{c}#1\end{tabular}\end{center}\end{frame}\miniframeson}
+\newcommand{\szakasz}[2][]{\section{#1}\subsection{}\cimdia{#2}}
+\newcommand{\bluebullet}{\textcolor{DeepSkyBlue3}{\quad $\bullet$} \,\,}
+
+\newenvironment{frame*}[1][]{\miniframesoff \begin{frame} #1}{\end{frame}\miniframeson}
+
+  % for admissible intersections
+  \newcommand{\bigsqcap}{\rotatebox[origin=c]{180}{$\bigsqcup$}}
+
+\newcommand{\felkorvonal}[2]{\draw[rounded corners=0] (180+#1:.25*#2 cm) arc (180+#1:360+#1:.25*#2 cm)--cycle;}
+\newcommand{\pecset}[2]{\begin{tikzpicture}[remember picture,overlay]
+\node [ draw=red, rectangle, rounded corners=5mm, inner sep=1mm, ultra thick, fill=white, fill opacity=.8, rotate=30, scale=#1, text opacity=0.7] at (current page.center) {#2};\end{tikzpicture}}
+
+\newcommand{\felirat}[7][]{\begin{tikzpicture}[remember picture,overlay]
+\node [draw=DeepSkyBlue3, rectangle, rounded corners=#3 mm, inner sep=#2mm, ultra thick, fill=white, fill opacity=.8, scale=#4, text opacity=1,#1]
+at ([xshift=#5 cm, yshift=#6 cm]current page.center) {#7};
+\end{tikzpicture}}
+
+\newcommand{\oda}[4]{\begin{tikzpicture}[remember picture,overlay]
+\node [scale=#1] at ([xshift=#2 cm, yshift=#3 cm]current page.center){#4};
+\end{tikzpicture}}
+
+\newcommand{\hazi}[6]{\begin{tikzpicture}[remember picture,overlay]
+\node [ draw=Coral1,
+        rectangle,
+        rounded corners=#2 mm,
+        inner sep=#1mm,
+        ultra thick,
+        fill=white,
+        fill opacity=.8,
+        rotate=0,
+        scale=#3,
+        text opacity=1]
+        at ([xshift=#4 cm, yshift=#5 cm]current page.center)
+        {#6};
+\end{tikzpicture}}
+
+\newcommand{\underconstruction}[1]{\begin{tikzpicture}[remember picture,overlay]
+\node [rectangle, rounded corners=5mm, inner sep=1mm, rotate=30, scale=#1, text opacity=0.4]at (current page.center){\textsc{\textcolor{orange}{\begin{tabular}{c}under \\construction\end{tabular}}}};
+\end{tikzpicture}}
+
+\newcommand{\dzsa}[1]{\textsc{\underline{#1}}:}
+\newcommand{\axiom}[1]{\bemph{(\mathrm{#1})}}
+
+
+
+% Emphasizing:
+\definecolor{barna}{rgb}{0.5,0.2,0.1}
+\newcommand{\bemph}[1] {{\color{DeepSkyBlue3}{#1}}}
+\newcommand{\kemph}[1] {{\color{blue}{#1}}}
+\newcommand{\cemph}[1]{\textcolor{red}{#1}}
+\newcommand{\zemph}[1] {{\color{Green2}{#1}}}
+\newcommand{\yemph}[1] {{\color{Orange1}{#1}}}
+%\renewcommand{\emph}[1]{\textbf{#1}}
+
+\newcommand{\FD}{\mathbf F}
+\newcommand{\FB}{\mathbf G}
+\newcommand{\PD}{\mathbf P}
+\newcommand{\PB}{\mathbf H}
+\newcommand{\GB}{\mathbf A}
+\newcommand{\GD}{\mathbf E}
+
+\newcommand{\Pmodels}{\mathrel{\models \hspace{-1.8ex} \raisebox{1.1ex}{\scalebox{.5}{$\mathrm{\bemph{P}}$}} }\,}
+\newcommand{\Omodels}{\mathrel{\models \hspace{-1.8ex} \raisebox{1.1ex}{\scalebox{.5}{$\mathrm{\bemph{O}}$}} }\,}
+\newcommand{\Kmodels}{\mathrel{\models \hspace{-1.8ex} \raisebox{1.1ex}{\scalebox{.5}{$\mathrm{\bemph{K}}$}} }\,}
+\newcommand{\Bmodels}{\mathrel{\models \hspace{-1.8ex} \raisebox{1.1ex}{\scalebox{.5}{$\mathrm{\bemph{B}}$}} }\,}
+\newcommand{\tru}{\textup{true}}
+\newcommand{\fal}{\textup{false}}
+\newcommand{\und}{\textup{undefined}}
+
+
+\newcommand{\FDDot}{\underline{\mathbf F}}
+\newcommand{\FBDot}{\underline{\mathbf G}}
+\newcommand{\PDDot}{\underline{\mathbf P}}
+\newcommand{\PBDot}{\underline{\mathbf H}}
+
+\newcommand{\CFD}{\mathbf F^c}
+\newcommand{\CFB}{\mathbf G^c}
+\newcommand{\CPD}{\mathbf P^c}
+\newcommand{\CPB}{\mathbf H^c}
+
+\newcommand{\CFDDot}{\underline{\mathbf F^c}}
+\newcommand{\CFBDot}{\underline{\mathbf G^c}}
+\newcommand{\CPDDot}{\underline{\mathbf P^c}}
+\newcommand{\CPBDot}{\underline{\mathbf H^c}}
+
+\renewcommand{\Diamond}{\scalebox{.9}{\raisebox{-.4ex}{\rotatebox{45}{$\Box$}}}}
+
+%causal
+\newcommand{\past}{\succ}
+\newcommand{\pasteq}{\succeq}
+\newcommand{\future}{\prec}
+\newcommand{\futureeq}{\preceq}
+%lightlike
+\newcommand{\llpast}{\nwarrow}
+\newcommand{\llpasteq}{\underline\nwarrow}
+\newcommand{\llfuture}{\nearrow}
+\newcommand{\llfutureeq}{\mathop{\underline\nearrow}}
+%timelike
+\newcommand{\tlpast}{\gg}
+\newcommand{\tlpasteq}{\underline \gg}
+\newcommand{\tlfuture}{\ll}
+\newcommand{\tlfutureeq}{\underline \ll}
+
+\newcommand{\egyuttjar}{\mathop{\uparrow \uparrow}}
+\newcommand{\Between}{\mathrm{B}}
+\newcommand{\EqDist}{\equiv}
+\newcommand{\ISCM}{\uparrow\equiv\uparrow}
+
+ \newcommand{\vonal} [1][.2]{\hspace{#1cm} | \hspace{#1cm}}
+
+ \newcommand{\lrule}[3][c]{\begin{array}{#1} #2  \\  \hline #3 \end{array}}
+ \newcommand{\dlrule}[3][c]{\begin{array}{#1} #2  \\  \hline\hline #3 \end{array}}
+ \newcommand{\dual}{\delta}
+
+ \newcommand{\mono}{\rightarrowtail}
+ \newcommand{\epi}{\twoheadrightarrow}
+ \newcommand{\iso}{\rightarrowtail \!\!\!\!\! \rightarrow}
+
+ \newcommand{\defegy}[1][.1]{\hspace{#1cm}\overset{\textup{\tiny def}}{=}\hspace{#1cm}}
+ \newcommand{\defpont}[1][.1]{\hspace{#1cm}\overset{\textup{\tiny def}}{:}\hspace{#1cm}}
+ \newcommand{\defekv}[1][.1]{\hspace{#1cm}\overset{\textup{\tiny def}}{ \Leftrightarrow }\hspace{#1cm}}
+ \newcommand{\lthen}{\rightarrow}
+ \newcommand{\liff}{\leftrightarrow}
+ \newcommand{\forallin}[2]{(\forall #1 \in #2)}
+ \newcommand{\existsin}[2]{(\exists #1 \in #2)}
+ \newcommand{\nexistsin}[2]{(\nexists #1 \in #2)}
+ \newcommand{\forallp}[1]{(\forall #1)}
+ \newcommand{\existsp}[1]{(\exists #1)}
+
+ \newcommand{\points}[1][0]{\hspace{#1ex}\hspace{-.5ex}:\hspace{-.5ex}\hspace{#1ex}}
+ \newcommand{\Points}{\mathrm{P}}
+ \newcommand{\Pointsf}{\mathrm{p}}
+ \newcommand{\Ex}{\mathrm{E}}
+
+\newcommand{\wline}[1]{\mathrm{wline}_{#1}}
+
+\newcommand{\magyi}[1]{\textup{\bemph{\tiny #1}}}
+\newcommand{\magyarazat}[2]{\overset{\substack{\textup{#2}\\ \downarrow}}{#1}}
+\newcommand{\wintension}[3][]{{[}\hspace{-.46mm}{[} {#3}{]}\hspace{-.46mm}{]}^{\mathfrak{#1}}_{#2}}
+\newcommand{\canintension}[2][]{{[}\hspace{-.46mm}{[} {#2}{]}\hspace{-.46mm}{]}_{\mathrm{#1}}}
+\newcommand{\intension}[2][]{{[}\hspace{-.46mm}{[} {#2}{]}\hspace{-.46mm}{]}^{\mathfrak{#1}}}
+
+\newcommand{\theory}[2][]{\mathrm{th}_{\mathfrak{#1}}(#2)}
+
+\newcommand{\seenby}{\reflectbox {$R$}}
+\newcommand{\derives}[1][]{\vdash_{\mathrm{#1}}}
+
+
+\newcommand{\PBTemplate}[1]{{#1} \overrightarrow {\PB}}
+\newcommand{\FBTemplate}[1]{{#1} \overrightarrow {\FB}}
+\newcommand{\BoxTemplate}[1]{{#1} \overrightarrow {\Box}}
+\newcommand{\PDTemplate}[1]{{#1} \widehat {\PD}}
+\newcommand{\FDTemplate}[1]{{#1} \widehat {\FD}}
+%\newcommand{\DiamondTemplate}[1]{#1\hspace{-.2ex} \mathop{\Diamond\hspace{-1.35ex} \raisebox{.4ex}{\scalebox{.5}{$\land$}}}\,}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newenvironment{tomb}[2][.1]{\arraycolsep=#1cm\begin{array}{#2}}{\end{array}}
+
+\beamertemplatenavigationsymbolsempty
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% COORDINATE SYSTEMS
+% COORDSYS (ORIGOCOORDINATENAME, WIDTH, HEIGHT)
+% Draws a Coordinatesystem around ORIGOCOORDINATENAME with a width of WIDTH and a height of HEIGHT,
+% names the beginning and end of axes, southwest corner, northwest corner,
+\newcommand{\CoordSys}[3]{
+\coordinate (XY#1) at ([xshift=#2 cm, yshift=#3 cm]#1);
+\coordinate (-XY#1) at ([xshift=-#2 cm, yshift=-#3 cm]#1);
+\coordinate (-X#1) at ([xshift=-#2 cm]#1);
+\coordinate (X#1) at ([xshift=#2 cm]#1);
+\coordinate (Y#1) at ([yshift=#3 cm]#1);
+\coordinate (-Y#1) at ([yshift=-#3 cm]#1);
+\draw [help lines, step=.5cm] (-XY#1) grid (XY#1);
+\draw[->] (-X#1)--(X#1);
+\draw[->] (-Y#1)--(Y#1);
+}
+
+\newcommand{\OneQuadrantCoordSys}[3]{
+\coordinate (XY#1) at ([xshift=#2 cm, yshift=#3 cm]#1);
+%\coordinate (-XY#1) at ([xshift=-#2 cm, yshift=-#3 cm]#1);
+%\coordinate (-X#1) at ([xshift=-#2 cm]#1);
+\coordinate (X#1) at ([xshift=#2 cm]#1);
+\coordinate (Y#1) at ([yshift=#3 cm]#1);
+%\coordinate (-Y#1) at ([yshift=-#3 cm]#1);
+%\draw [help lines, step=.5cm] (#1) grid (XY#1);
+\draw[->, name path=XAxis#1] (#1)--(X#1);
+\draw[->, name path=YAxis#1] (#1)--(Y#1);
+}
+
+% \DistanceLabel{SS}{AS}{-45}{1}{pos=.5}{1}
+\newcommand{\DistanceLabel}[6]{
+\coordinate(#1horgony) at ([shift=(#3:#4)] #1);
+\coordinate(#2horgony) at ([shift=(#3:#4)] #2);
+\draw[thin, red, <->] (#1horgony)--(#2horgony) node[#5, scale=.7]{#6};
+\draw[opacity=.4, black] (#1)--(#1horgony);
+\draw[opacity=.4, black] (#2)--(#2horgony);
+}
+
+
+
+%Lorentz(OriginalOriginCoord, ResultingOriginCoord, SpeedNum, PointCoord, Label)
+%
+\newcommand{\Lorentz}[5]{
+\path (#1); \pgfgetlastxy{\XCoord}{\YCoord}; % Extracting coordinates of the Origin
+\pgfmathsetmacro{\XOrigin}{\XCoord} % Saving X coordinate
+\pgfmathsetmacro{\YOrigin}{\YCoord} % Saving Y coordinate
+\path (#4); \pgfgetlastxy{\XCoord}{\YCoord}; % Extracting coordinates of the Point
+\pgfmathsetmacro{\XEvent}{\XCoord} % Saving X coordinate
+\pgfmathsetmacro{\YEvent}{\YCoord} % Saving Y coordinate
+\pgfmathsetmacro{\XEventWRTOrigin}{\XEvent-\XOrigin} % Relativizing to the origin
+\pgfmathsetmacro{\YEventWRTOrigin}{\YEvent-\YOrigin} % Relativizing to the origin
+\pgfmathparse{XLorentz(#3,\XEventWRTOrigin,\YEventWRTOrigin)} % transforming x
+\pgfmathsetmacro{\XEventTr}{\pgfmathresult} % save the result of x
+\pgfmathparse{YLorentz(#3,\XEventWRTOrigin,\YEventWRTOrigin)} % transforming y
+\pgfmathsetmacro{\YEventTr}{\pgfmathresult} % save the result of y
+\node[world](#5) at (
+[xshift=\XEventTr pt,
+ yshift=\YEventTr pt] #2){};
+}
+
+\newcommand{\ThreeDimCoordSys}[4]{
+\coordinate (XY#1) at ([xshift=#2 cm, yshift=#3 cm]#1);
+\coordinate (-XY#1) at ([xshift=-#2 cm, yshift=-#3 cm]#1);
+\coordinate (X#1) at ([xshift=#2 cm]#1);
+\coordinate (-X#1) at ([xshift=-#2 cm]#1);
+\coordinate (Y#1) at ([yshift=#3 cm]#1);
+\coordinate (-Y#1) at ([yshift=-#3 cm]#1);
+%\path (#1); \pgfgetlastxy{\XCoord}{\YCoord}; % Extracting coordinates of the Origin
+%\pgfmathsetmacro{\XCoordcm}{\XCoord/28.4527}
+%\pgfmathsetmacro{\YCoordcm}{\YCoord/28.4527}
+%\coordinate (Z#1) at (\XCoordcm, \YCoordcm,#4);
+%\coordinate (-Z#1) at (\XCoordcm, \YCoordcm,-#4);
+%\draw [help lines, step=.5cm] (-XY#1) grid (XY#1);
+\coordinate (Z#1) at ([shift=(\ThirdAxisAngle : #4*\ThirdAxisUnit cm)]#1);
+\coordinate (-Z#1) at ([shift=(\ThirdAxisAngle : #4*\ThirdAxisUnit cm)]#1);
+\draw[->, name path=XAxis#1] (#1)--(X#1);
+\draw[->, name path=YAxis#1] (#1)--(Y#1);
+\draw[->, name path=ZAxis#1] (#1)--(Z#1);
+}
+
+
+\newdimen\XCoord
+\newdimen\YCoord
+
+
+
+
+\author{Attila Moln\'ar}
+\date{2014. March 21.}
+\title{Test}
+\institute{ELTE}
+\begin{document}
+\footnotesize
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SLIDE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SLIDE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\szakasz[Intro]{Introduction into \\ Special Relativity}
+\begin{frame}
+\frametitle{Spacetime Diagrams}
+\framesubtitle{Important events in the life of Alice and Bob}
+\vspace{-.5cm}\[\begin{tikzpicture}[>=stealth, scale=.6,
+world/.style={inner sep=0, minimum size=.15cm, fill=black, circle},
+intension/.style={rounded corners=10pt, fill=white!90!gray, fill opacity=1, draw=gray, thick, inner sep=10},
+altrel/.style={->},
+axis/.style={->},
+felirat/.style={inner sep=5, scale=.7},
+bejaras/.style={blue}]
+\node at (5,10.5) {2D spacetime diagram};
+\coordinate (O) at (0,0);
+\coordinate (Y) at (0,10);
+\coordinate (X) at (10,0);
+\draw[axis]  (O) -- (Y) node[midway, above, sloped]{time according to Cecile};
+\draw[axis]  (O) -- (X) node[midway, below, sloped]{space according to Cecile};;
+\node[anchor=north] at (X) {$x$};
+\node[anchor=east] at (Y) {$t$};
+\draw [help lines, step=.5cm] (O) grid (10,10);
+%%%%%%%%%% PAUSE %%%%%%%%%%%
+\node [world] (A) at (2.5,1.5) {};
+\node [felirat, anchor=south] at (A) {Alice gets her first job};
+\node [felirat, anchor=north] at (A) {A};
+\node [world] (B) at (7.5,1.5) {};
+\node [felirat, anchor=south] at (B) {Bob's 25th birthday party};
+\node [felirat, anchor=north] at (B) {B};
+\node [world] (C) at (2.5,8.5) {};
+\node [felirat, anchor=south] at (C) {Wedding of Alice and Bob};
+\node [felirat, anchor=north] at (C) {AB};
+\node [world](Cec) at (0,6) {};
+\node [felirat, anchor=north west] at (Cec) {C: Cecile defends her PhD};
+%%%%%%%%%% PAUSE %%%%%%%%%%%
+\node[anchor=north east, intension] at (-1,10.5) {\hspace{-.6cm}\begin{minipage}{4.5cm}
+\scriptsize\begin{itemize}
+\item AB happened later than A and B according to Alice.
+\item A and B happened \emph{at the same time} according to Alice. \\ In other words, A and B are \emph{simultaneous}.
+\item Bob was not there when Alice got her first job.
+\item Bob had to travel to the left to his wedding since his 25th birthday.
+\item A and AB happened \emph{at the same location} according to Alice.
+\item Cecile was present on her PhD defense, but she wasn't there when A, B, AB happened.
+\end{itemize}
+\end{minipage}};
+%%%%%%%%%% PAUSE %%%%%%%%%%%
+\end{tikzpicture}\]\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SLIDE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\vspace{-0.2 cm}
+\[\hspace{-1.1 cm}
+ \begin{tikzpicture}[scale=1]
+    \draw (0,0) rectangle (11,8);
+  \end{tikzpicture}
+\]
+\end{frame}
+
+\begin{frame}[fragile]
+\vspace{-0.2 cm}
+\[\hspace{-1.1 cm}
+ \begin{tikzpicture}[scale=1]
+    \draw (0,0) rectangle (12,8);
+  \end{tikzpicture}
+\]
+\end{frame}
+\end{document}

@@ -1,0 +1,6 @@
+\beamer@endinputifotherversion {3.36pt}
+\beamer@sectionintoc {1}{Intro}{2}{0}{1}
+\beamer@sectionintoc {2}{Paradigmatic Effects}{7}{0}{2}
+\beamer@sectionintoc {3}{Lorentz Transformation}{34}{0}{3}
+\beamer@sectionintoc {4}{NoFTL}{36}{0}{4}
+\beamer@sectionintoc {5}{Minkowski distance}{56}{0}{5}

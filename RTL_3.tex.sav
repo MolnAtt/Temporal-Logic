@@ -1,0 +1,967 @@
+\documentclass[xcolor=x11names]{beamer}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  This Beamer template was created by Cameron Bracken.
+%%  Anyone can freely use or modify it for any purpose
+%%  without attribution.
+%%
+%%  Last Modified by C. Bracken: January 9, 2009
+%%
+%%  The preamble, and maybe some modification of the Cameron Bracken's template is due to Attila Molnár.
+%%
+%%
+
+%% General document
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{decorations.fractals}
+\usetikzlibrary{decorations.text}
+\usepgflibrary{arrows}
+\usetikzlibrary{fadings}
+\usetikzlibrary[decorations.pathmorphing]
+\tikzfading[name=fade inside, inner color=transparent!70, outer color=transparent!70]
+\usetikzlibrary{calc}
+\usetikzlibrary{intersections}
+\usetikzlibrary{shapes}
+\usetikzlibrary{patterns}
+\usefonttheme{serif}
+\usepackage{amssymb} 			
+\usepackage{amsmath}
+\usepackage{ifthen}
+\usepackage[normalem]{ulem}
+\usepackage{mathrsfs}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Beamer Layout %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\useoutertheme[subsection=false,shadow]{miniframes}
+\useinnertheme{default}
+\usefonttheme{serif}
+%\usepackage{txfonts} %Hook for strict implication!
+\DeclareSymbolFont{symbolsC}{U}{txsyc}{m}{n}
+\DeclareMathSymbol{\strictif}{\mathrel}{symbolsC}{74}
+\DeclareMathSymbol{\boxright}{\mathrel}{symbolsC}{128}
+\usepackage{palatino}
+%\usepackage[uppercase=upright,charter]{mathdesign}
+
+\setbeamerfont{title like}{shape=\scshape}
+\setbeamerfont{frametitle}{shape=\scshape}
+
+
+\setbeamercolor*{lower separation line head}{bg=white!40!DeepSkyBlue3}
+\setbeamercolor*{normal text}{fg=black,bg=white}
+\setbeamercolor*{alerted text}{fg=red}
+\setbeamercolor*{example text}{fg=black}
+\setbeamercolor*{structure}{fg=black}
+
+\setbeamercolor*{palette tertiary}{fg=black,bg=white!90!DeepSkyBlue3}
+\setbeamercolor*{palette quaternary}{fg=black,bg=black!10}
+
+%\setbeamercolor{block body alerted}{bg=normal text.bg!90!DeepSkyBlue4}
+\setbeamercolor{block body}{bg=normal text.bg!95!DeepSkyBlue3}
+%\setbeamercolor{block body example}{bg=normal text.bg!90!DeepSkyBlue4}
+%\setbeamercolor{block title alerted}{use={normal text,alerted text},fg=alerted text.fg!75!normal text.fg,bg=normal text.bg!90!DeepSkyBlue4}
+\setbeamercolor{block title}{bg=normal text.bg!70!DeepSkyBlue3}
+%\setbeamercolor{block title example}{use={normal text,example text},fg=example text.fg!75!normal text.fg,bg=normal text.bg!75!DeepSkyBlue4}
+
+\setbeamertemplate{blocks}[rounded][shadow=true]
+%\setbeamertemplate{background canvas}[vertical shading][bottom=white,top=structure.fg!25]
+%\setbeamertemplate{sidebar canvas left}[horizontal shading][left=white!40!black,right=black]
+\setbeamertemplate{itemize items}[circle]
+\setbeamercolor*{itemize item}{fg=DeepSkyBlue3}
+\setbeamercolor*{itemize subitem}{fg=DeepSkyBlue3}
+\setbeamercolor*{itemize subsubitem}{fg=DeepSkyBlue3}
+\setbeamertemplate{enumerate items}[circle]
+%\setbeamercolor{item projected}{bg=DeepSkyBlue3,fg=black}
+\setbeamercolor{item projected}{bg=white,fg=DeepSkyBlue3}
+\setbeamercolor*{enumerate item}{fg=DeepSkyBlue3}
+\setbeamercolor*{enumerate subitem}{fg=DeepSkyBlue3}
+\setbeamercolor*{enumerate subsubitem}{fg=DeepSkyBlue3}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newenvironment{defi}[1][]{\begin{block}{\footnotesize \textsc{Definition} \ifthenelse{\equal{#1}{}}{}{\, (#1)}}}{\end{block}}
+\newenvironment{prop}[1][]{\begin{block}{\footnotesize \textsc{Proposition} \ifthenelse{\equal{#1}{}}{}{\, (\textsc{#1})}}}{\end{block}}
+\newenvironment{lemm}[1][]{\begin{block}{\footnotesize \textsc{Lemma} \ifthenelse{\equal{#1}{}}{}{\, (\textsc{#1})}}}{\end{block}}
+\newenvironment{idea}[1][]{\begin{block}{\footnotesize \textsc{Idea} \ifthenelse{\equal{#1}{}}{}{\, (\textsc{#1})}}}{\end{block}}
+\newenvironment{rema}[1][]{\begin{block}{\footnotesize \textsc{Remark} \ifthenelse{\equal{#1}{}}{}{\, (\textsc{#1})}}}{\end{block}}
+\newenvironment{coro}[1][]{\begin{block}{\footnotesize \textsc{Corollary} \ifthenelse{\equal{#1}{}}{}{\, (\textsc{#1})}}}{\end{block}}
+\newenvironment{tete}[1][]{\begin{block}{\footnotesize \textsc{Theorem} \ifthenelse{\equal{#1}{}}{}{\, (\textsc{#1})}}}{\end{block}}
+\newenvironment{claim}[1][]{\begin{block}{Claim \ifthenelse{\equal{#1}{}}{}{\, (\textsc{#1})}}}{\end{block}}
+%\newenvironment{lemma}[1][]{\begin{block}{Lemma \ifthenelse{\equal{#1}{}}{}{\, (\textsc{#1})}}}{\end{block}}
+\newenvironment{question}[1][]{\begin{block}{Question \ifthenelse{\equal{#1}{}}{}{\, (\textsc{#1})}}}{\end{block}}
+\newenvironment{rem}[1][]{\begin{block}{Remark \ifthenelse{\equal{#1}{}}{}{\, (\textsc{#1})}}}{\end{block}}
+\newenvironment{homework}[1][]{\begin{block}{Homework \ifthenelse{\equal{#1}{}}{}{\, (\textsc{#1})}}}{\end{block}}
+\newenvironment{proo}[1][]{\begin{block}{\footnotesize \textsc{Proof} \ifthenelse{\equal{#1}{}}{}{\, (\textsc{#1})}}}{\end{block}}
+
+%%%%%%%%%%%%%%%%%%%%%
+%% To evade unnecessary circles, mainly for \cimdia
+%%%%%%%%%%%%%%%%%%%%%
+
+\makeatletter
+\let\beamer@writeslidentry@miniframeson=\beamer@writeslidentry
+\def\beamer@writeslidentry@miniframesoff{%
+  \expandafter\beamer@ifempty\expandafter{\beamer@framestartpage}{}% does not happen normally
+  {%else
+    % removed \addtocontents commands
+    \clearpage\beamer@notesactions%
+  }
+}
+\newcommand*{\miniframeson}{\let\beamer@writeslidentry=\beamer@writeslidentry@miniframeson}
+\newcommand*{\miniframesoff}{\let\beamer@writeslidentry=\beamer@writeslidentry@miniframesoff}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%% END %%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%% Formatting Commands
+
+\newcommand{\cimdia}[1] {\miniframesoff \begin{frame}\begin{center}\huge \begin{tabular}{c}#1\end{tabular}\end{center}\end{frame}\miniframeson}
+\newcommand{\szakasz}[2][]{\section{#1}\subsection{}\cimdia{#2}}
+\newcommand{\bluebullet}{\textcolor{DeepSkyBlue3}{\quad $\bullet$} \,\,}
+
+\newenvironment{frame*}[1][]{\miniframesoff \begin{frame} #1}{\end{frame}\miniframeson}
+
+  % for admissible intersections
+  \newcommand{\bigsqcap}{\rotatebox[origin=c]{180}{$\bigsqcup$}}
+
+  % Intelligent curves for tikz:
+  % Use it in this way: \gorbe{elejenev}{vegenev}{elejeszog}{elejelendulet}{vegeszog}{vegelendulet};
+  \newcommand{\gorbe}[6]{\draw (#1).. controls ([shift=(#3: #4 cm)]#1) and ([shift=(#5: #6 cm)]#2) .. (#2);}
+  \newcommand{\gorbefelirattal}[8]{\draw (#1).. controls ([shift=(#3: #4 cm)]#1) and ([shift=(#5: #6 cm)]#2) .. (#2) node[#8] {#7};}
+
+\newcommand{\pipa}{%
+\begin{tikzpicture}[green!50!black, thick, scale=.1]
+\gorbe{0,1}{2,2}{-80}{1}{225}{.7}
+\end{tikzpicture}}
+
+\newcommand{\ellentmondas}
+		{\begin{tikzpicture}[scale=0.2]
+			\draw[rounded corners=3pt, rotate=10, red,
+					->] (0.75,2)--(0,0.66)--(1,1.33)--(0.25,0);
+		\end{tikzpicture}}
+\newcommand{\indirektfelteves}
+		{\begin{tikzpicture}[scale=0.2]
+			\draw[rounded corners=3pt, rotate=10, red,
+					<-] (0.75,2)--(0,0.66)--(1,1.33)--(0.25,0);
+		\end{tikzpicture}}
+
+\newcommand{\pecset}[2]{\begin{tikzpicture}[remember picture,overlay]
+\node [ draw=red,
+        rectangle,
+        rounded corners=5mm,
+        inner sep=1mm,
+        ultra thick,
+        fill=white,
+        fill opacity=.8,
+        rotate=30,
+        scale=#1,
+        text opacity=0.7]
+        at (current page.center)
+        {#2};
+\end{tikzpicture}}
+
+%\felirat{inner sep}{rounded corners}{scale}{x}{y}{text}
+\newcommand{\felirat}[7][]{\begin{tikzpicture}[remember picture,overlay]
+\node [draw=DeepSkyBlue3, rectangle, rounded corners=#3 mm, inner sep=#2mm, ultra thick, fill=white, fill opacity=.8, scale=#4, text opacity=1,#1]
+at ([xshift=#5 cm, yshift=#6 cm]current page.center) {#7};
+\end{tikzpicture}}
+
+\newcommand{\hazi}[6]{\begin{tikzpicture}[remember picture,overlay]
+\node [ draw=Coral1,
+        rectangle,
+        rounded corners=#2 mm,
+        inner sep=#1mm,
+        ultra thick,
+        fill=white,
+        fill opacity=.8,
+        rotate=0,
+        scale=#3,
+        text opacity=1]
+        at ([xshift=#4 cm, yshift=#5 cm]current page.center)
+        {#6};
+\end{tikzpicture}}
+
+
+% Emphasizing:
+\definecolor{barna}{rgb}{0.5,0.2,0.1}
+\newcommand{\bemph}[1] {{\color{DeepSkyBlue3}{#1}}}
+\newcommand{\kemph}[1] {{\color{blue}{#1}}}
+\newcommand{\cemph}[1]{\textcolor{red}{#1}}
+\newcommand{\zemph}[1] {{\color{Green2}{#1}}}
+\newcommand{\yemph}[1] {{\color{Orange1}{#1}}}
+\renewcommand{\emph}[1]{\textbf{#1}}
+
+\newcommand{\FD}{\mathbf F}
+\newcommand{\FB}{\mathbf G}
+\newcommand{\PD}{\mathbf P}
+\newcommand{\PB}{\mathbf H}
+
+\newcommand{\FDDot}{\underline{\mathbf F}}
+\newcommand{\FBDot}{\underline{\mathbf G}}
+\newcommand{\PDDot}{\underline{\mathbf P}}
+\newcommand{\PBDot}{\underline{\mathbf H}}
+
+
+% i dont know whats this
+\newcommand{\matbuborek}[1]{%
+\begin{tikzpicture}
+\node[draw=black, rounded corners=2pt, rectangle, inner sep=1mm] at (0,0){$#1$};
+\end{tikzpicture}}
+
+
+\newcommand{\dzsa}[1]{\textsc{\underline{#1}}:}
+
+% modal operators:
+ \newcommand{\diamondmeret}{.18}
+ \newcommand{\boxmeret}{4*\diamondmeret/5}
+
+
+ \newcommand{\mland} [1][.1]{\hspace{#1cm}\textup{and}\hspace{#1cm}}
+ \newcommand{\mlthen}[1][.1]{\hspace{#1cm}\Rightarrow\hspace{#1cm}}
+ \newcommand{\mlnot} [1][.1]{\hspace{#1cm}\textup{not }}
+ \newcommand{\mlor}  [1][.1]{\hspace{#1cm}\textup{or}\hspace{#1cm}}
+ \newcommand{\mliff} [1][.1]{\hspace{#1cm}\mliff\hspace{#1cm}}
+ \newcommand{\vonal} [1][.2]{\hspace{#1cm} | \hspace{#1cm}}
+ \newcommand{\mlwhere} [1][.2]{\hspace{#1cm}\textup{where}\hspace{#1cm}}
+ \newcommand{\lrule}[3][c]{\begin{array}{#1} #2  \\  \hline #3 \end{array}}
+ \newcommand{\dlrule}[3][c]{\begin{array}{#1} #2  \\  \hline\hline #3 \end{array}}
+ \newcommand{\dual}{\delta}
+\newcommand{\Dajmond}{\lozenge}
+\newcommand{\Boksz}{\square}
+\newcommand{\felDajmond}{\blacklozenge}
+\newcommand{\felBoksz}{\blacksquare}
+\newcommand{\Pmodels}{\mathrel{\models \hspace{-1.8ex} \raisebox{1.1ex}{\scalebox{.5}{$\mathrm{\bemph{P}}$}} }\,}
+\newcommand{\Omodels}{\mathrel{\models \hspace{-1.8ex} \raisebox{1.1ex}{\scalebox{.5}{$\mathrm{\bemph{O}}$}} }\,}
+\newcommand{\felle}	
+	{\,\begin{tikzpicture}
+		\pgfmathsetmacro{\szog}{70}
+		\pgfmathsetmacro{\hossz}{0.33}
+	\draw[->,>=stealth,rounded corners=2pt] (0,0)	--(\szog:\hossz cm)
+								--([shift=(-\szog :\hossz cm)]\szog:\hossz cm);	
+	\end{tikzpicture}\,}
+\newcommand{\lefel}
+	{\, \begin{tikzpicture}
+		\pgfmathsetmacro{\szog}{70}
+		\pgfmathsetmacro{\hossz}{0.33}
+		\draw[->,>=stealth,rounded corners=2pt] (0,0)	--(-\szog:\hossz cm)
+								--([shift=(\szog :\hossz cm)]-\szog:\hossz cm);
+	\end{tikzpicture}\, }
+\newcommand{\enn}
+{\mathbf{N}}
+\newcommand{\nne}
+{\reflectbox{$\mathbf{N}$}}
+
+\newcommand{\mono}{\rightarrowtail}
+\newcommand{\epi}{\twoheadrightarrow}
+\newcommand{\iso}{\rightarrowtail \!\!\!\!\! \rightarrow}
+
+ \newcommand{\defegy}[1][.1]{\hspace{#1cm}\overset{\textup{\tiny def}}{=}\hspace{#1cm}}
+ \newcommand{\defpont}[1][.1]{\hspace{#1cm}\overset{\textup{\tiny def}}{:}\hspace{#1cm}}
+ \newcommand{\defekv}[1][.1]{\hspace{#1cm}\overset{\textup{\tiny def}}{ \Leftrightarrow }\hspace{#1cm}}
+ \newcommand{\lthen}{\rightarrow}
+ \newcommand{\liff}{\leftrightarrow}
+ \newcommand{\lminus}{-}
+ \newcommand{\lsup}{\mbox{$\mathop{\sim}$}}
+ \newcommand{\colnot}{\mbox{$\mathop{\sim}$}}
+ \newcommand{\forallin}[2]{(\forall #1 \in #2)}
+ \newcommand{\existsin}[2]{(\exists #1 \in #2)}
+ \newcommand{\nexistsin}[2]{(\nexists #1 \in #2)}
+ \newcommand{\forallp}[1]{(\forall #1)}
+ \newcommand{\existsp}[1]{(\exists #1)}
+ \newcommand{\forallR}[2]{(\forall #1 \reflectbox{$R$} #2)}
+ \newcommand{\existsR}[2]{(\exists #1 \reflectbox{$R$} #2)}
+\newcommand{\magyarazat}[2]{\overset{\substack{\textup{#2}\\ \downarrow}}{#1}}
+\newcommand{\magyi}[1]{\textup{\bemph{\tiny #1}}}
+
+
+\newcommand{\bintension}[2][]{{{[}\!{[}} {#2}{{]}\!{]}}^{\mathcal{#1}}}
+\newcommand{\wintension}[3][]{{[}\hspace{-.46mm}{[} {#3}{]}\hspace{-.46mm}{]}^{\mathfrak{#1}}_{#2}}
+\newcommand{\canintension}[2][]{{[}\hspace{-.46mm}{[} {#2}{]}\hspace{-.46mm}{]}_{\mathrm{#1}}}
+\newcommand{\jelentes}[2]{{{[}\!{[}} {#1}{{]}\!{]}}^{{#2}}}
+\newcommand{\intension}[2][]{{[}\hspace{-.46mm}{[} {#2}{]}\hspace{-.46mm}{]}^{\mathfrak{#1}}}
+\newcommand{\Kintension}[2][]{|\!| {#2} |\!|^{\mathcal{#1}}}
+\newcommand{\theory}[2][]{\mathrm{th}_{\mathfrak{#1}}(#2)}
+\newcommand{\seenby}{\reflectbox {$R$}}
+\newcommand{\derives}[1][]{\vdash_{\mathrm{#1}}}
+\newcommand{\ugyanaz}[1]{\mathrel{\overset{#1}{\equiv}}}
+
+
+\newcommand{\harmasosztas}[6]{
+
+\begin{minipage}{#1\textwidth}%
+#4%
+\end{minipage}%
+\begin{minipage}{#2\textwidth}%
+#5%
+\end{minipage}%
+\begin{minipage}{#3\textwidth}%
+#6%
+\end{minipage}
+
+}
+
+
+\newcommand{\felkor}[8]{%
+\begin{scope}[draw=#5,very thick,fill opacity=.15,draw opacity=.5,text opacity=1]
+\draw[fill=#5]
+([shift=(#3:#2)]#1) arc (#3:180+#3:#2) -- cycle;
+\node at ([shift=(#7*180+#3:#2),shift=(-#7*90+135+#3:0.5*#6)]#1){#8};
+\clip ([shift=(#3:#2)]#1) arc (#3:180+#3:#2);
+ \draw[fill=#5] ([shift=(#7*180+#3:#2)]#1) circle (#6);
+\end{scope}
+}
+\newcommand{\felkorvonal}[2]{
+\draw[rounded corners=0] (180+#1:.25*#2 cm) arc (180+#1:360+#1:.25*#2 cm)--cycle;
+}
+
+
+\newcommand{\BoxTemplate}[1]{{#1} \mathop{\Box\hspace{-1.35ex} \raisebox{.5ex}{\scalebox{.5}{$\lthen$}}}}
+\newcommand{\DiamondTemplate}[1]{#1\hspace{-.2ex} \mathop{\Diamond\hspace{-1.35ex} \raisebox{.4ex}{\scalebox{.5}{$\land$}}}\,}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newenvironment{tomb}[2][.1]{\arraycolsep=#1cm\begin{array}{#2}}{\end{array}}
+\beamertemplatenavigationsymbolsempty
+
+
+\author{Attila Moln\'ar}
+\date{2014. March 21.}
+\title{Axiomatization of Kripkean FOML}
+\institute{ELTE}
+\begin{document}
+\footnotesize
+
+
+\begin{frame}
+\centering
+\textsc{\Large Relativistic Temporal Logic \\[1em] Ways of Indeterminism}
+
+\bigskip
+
+{ \small Attila Moln\'ar
+
+    \textit{E\"otv\"os Lor\'and University}}
+
+ \begin{figure}
+\includegraphics[scale=.3]{elte_cimer.png}
+ \end{figure}
+
+	\today
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% NEXT SLIDE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\szakasz[Trees]{Tree of Time}
+
+\begin{frame}
+	\frametitle{Indeterminist frames}
+\footnotesize
+
+\bigskip
+
+\begin{minipage}{.7\textwidth}
+Consider the tree on the right.
+Let $p$ represent the sentence ``There is a sea battle''.
+Suppose that $w$ is today, and $w_1$ and $w_2$ are the two possible tomorrows.
+We have that $w \models \FD p \land \FD \lnot p$, therefore, %what does $\FD p$ mean?
+\end{minipage}
+
+
+\felirat{1.5}{1}{1}{4}{2.5}{
+\begin{tikzpicture}[world/.style={inner sep=.4mm, fill=black, circle},>=stealth, scale=.7]
+\node[world] (v1) at (0,-2) {};
+\node[world] (v2) at (-1,0) {};
+\node[world] (v3) at (1,0) {};
+\node[anchor=south] at (v2) {$w_1\Vdash p$};
+\node[anchor=south] at (v3) {$w_2\Vdash \lnot p$};
+\node[anchor=north] at (v1) {$w$};
+\draw[->]  (v1) edge (v2);
+\draw[->]  (v1) edge (v3);
+\end{tikzpicture}
+}
+
+
+\pause %%%%%%%%%%%%%%%%%% --- PAUSE --- %%%%%%%%%%%%%%%%%%
+
+\bigskip
+
+\begin{itemize}
+\item Since $\FD p$ means ``It \emph{will} be true (tomorrow) that $p$'', in $w$ it is true that
+\\ \begin{center}\scriptsize ``It will be true (tomorrow) that there is sea battle and \\ It will be true (tomorrow) that there is no see battle''.\end{center}
+\pause %%%%%%%%%%%%%%%%%% --- PAUSE --- %%%%%%%%%%%%%%%%%%
+\item Since $\FD p$ means ``\emph{In the future (tomorrow), it would be possible} that $p$'', in $w$ it is true that
+\\ \begin{center}\scriptsize  ``In the future (tomorrow), it would be possible that there is a sea battle and \\In the future (tomorrow), it would be possible that there is no see battle''.\end{center}
+\end{itemize}
+
+\pause %%%%%%%%%%%%%%%%%% --- PAUSE --- %%%%%%%%%%%%%%%%%%
+
+\vfill
+
+So trees are appropriate drawings but somehow not ``will'' is the appropriate word for $\FD$. But then what is the meaning of ``will'' here?.
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% NEXT SLIDE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+	\frametitle{Histories}
+\footnotesize
+
+Consider the trees as a \emph{bundle} of linear frames, that are called \emph{histories} in that context.
+
+\[\begin{tikzpicture}[world/.style={inner sep=.4mm, fill=black, circle},>=stealth, scale=.7]
+\node[world] (v1) at (0,-2) {};
+\node[world] (v2) at (-1,0) {};
+\node[world] (v3) at (1,0) {};
+\node[world] (v4) at (-2,2) {};
+\node[world] (v5) at (0,2) {};
+\node[world] (v6) at (-3,4) {};
+\node[world] (v9) at (2,2) {};
+\node[world] (v10) at (1,4) {};
+\node[world] (v11) at (3,4) {};
+\node[world] (v8) at (0,4) {};
+\node[world] (v7) at (-1,4) {};
+\draw[->]  (v1) edge (v2);
+\draw[->]  (v1) edge (v3);
+\draw[->]  (v2) edge (v4);
+\draw[->]  (v2) edge (v5);
+\draw[->]  (v4) edge (v6);
+\draw[->]  (v4) edge (v7);
+\draw[->]  (v5) edge (v8);
+\draw[->]  (v3) edge (v9);
+\draw[->]  (v9) edge (v10);
+\draw[->]  (v9) edge (v11);
+\begin{scope}[line width=3, opacity=.5]
+\pause %%%%%%%%%%%%%%%%%% --- PAUSE --- %%%%%%%%%%%%%%%%%%
+\draw[red]    plot[smooth, tension=1] coordinates {(v1) (v2) (v4) (v6)};
+\pause %%%%%%%%%%%%%%%%%% --- PAUSE --- %%%%%%%%%%%%%%%%%%
+\draw[blue]   plot[smooth, tension=1] coordinates {(v1) (v2) (v4) (v7)};
+\pause %%%%%%%%%%%%%%%%%% --- PAUSE --- %%%%%%%%%%%%%%%%%%
+\draw[green]  plot[smooth, tension=1] coordinates {(v1) (v2) (v5) (v8)};
+\pause %%%%%%%%%%%%%%%%%% --- PAUSE --- %%%%%%%%%%%%%%%%%%
+\draw[orange] plot[smooth, tension=1] coordinates {(v1) (v3) (v9) (v10)};
+\pause %%%%%%%%%%%%%%%%%% --- PAUSE --- %%%%%%%%%%%%%%%%%%
+\draw[violet] plot[smooth, tension=1] coordinates {(v1) (v3) (v9) (v11)};
+\end{scope}
+\end{tikzpicture}\]
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% NEXT SLIDE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+	\frametitle{Histories}
+\footnotesize
+
+Let $\mathfrak F= (W, <)$ be a tree.
+\bigskip
+
+\dzsa{Definition} A \emph{history} $h$ is a maximally linear subset of $W$, i.e.,
+
+\begin{itemize}
+\item linear: $\forallin {w,v}h \; w<v \lor w=v \lor w>v $.
+\item there is no proper linear extension of it:
+\[ \forallp {h'\supseteq h} \big[ h' \textup{ is linear } \lthen h'\subseteq h.\big]\]
+\end{itemize}
+
+$h\overset w \sim h'$ will mean that histories $h$ and $h'$ share the same past until $w$. Since we are working with trees, this can be formalized simply by %\[ h\overset w \sim h' \defekv w\in h\cap h' \textup{ and } \forallp {v<w} (v\in h \iff v\in h') \]
+%Note that this definition is the same as
+\[ h\overset w \sim h' \defekv w\in h\cap h' \]
+
+
+The set of all histories of a frame will be denoted by $\mathrm H (\mathfrak F)$:
+\[\mathrm H (\mathfrak F) \defegy \{ h\subseteq W : \textup{ $h$ is maximally linear}\}\]
+
+\pause %%%%%%%%%%%%%%%%%% --- PAUSE --- %%%%%%%%%%%%%%%%%%
+
+\hazi{2}{1}{.7}{0}{-4}{\begin{tabular}{l} show that $\overset w\sim$ is an equivalence relation.\end{tabular}}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% NEXT SLIDE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+	\frametitle{\large Indeterminist interpretations of the tense ``will''.}
+\footnotesize
+
+Read $\FD \varphi$ as ``it will be the case that $\varphi$''.
+
+Is it plausible that
+
+{\large
+\[ (\FD \varphi \land \FD \psi)\, \lthen \, \big[ \FD(\varphi \land \FD \psi) \lor \FD(\varphi \land \psi) \lor \FD(\FD \varphi \land \psi)\big] \quad ? \]
+}
+
+{\scriptsize If $\varphi$ will be true and $\psi$ will be true, then at least one of the followings is true:
+\begin{itemize}
+\item $\varphi$ will be true, and after that $\psi$ will true.
+\item $\psi$ will be true, and after that $\varphi$ will true.
+\item $\varphi$ and $\psi$ will be true at the same time.
+\end{itemize}}
+
+\bigskip
+
+\pause %%%%%%%%%%%%%%%%%% --- PAUSE --- %%%%%%%%%%%%%%%%%%
+
+\textbf{Yes:} Ockhamist future
+
+\bigskip
+
+\pause %%%%%%%%%%%%%%%%%% --- PAUSE --- %%%%%%%%%%%%%%%%%%
+
+\textbf{No:} Peircean future
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% NEXT SLIDE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\szakasz[Ockhamism]{Ockhamist future}
+
+\begin{frame}
+	\frametitle{Ockhamist future}
+\footnotesize
+
+{\scriptsize
+\begin{center}
+\begin{minipage}{.9\textwidth}
+``Ockhamism'' [\dots] holds that it is meaningless to ask about the truth
+value of ``a will happen'' at  $w$  without further specifications: the problem is
+correctly expressed only if, in addition to $w$, one of its possible futures is specified.
+``Will happen'' has to be understood as ``will happen in the specified future of $w$''.
+\end{minipage}
+\end{center}
+\hfill \textsc{Zanardo 1996} (about \textsc{Prior 1967})
+}
+
+\begin{center}
+\cemph{So the history is always a tacit parameter}
+\end{center}
+
+\pause %%%%%%%%%%%%%%%%%% --- PAUSE --- %%%%%%%%%%%%%%%%%%
+
+\medskip
+
+Indeterminism comes into the picture when we change the ``specified possible future'' (history) with an operator $\Diamond$.
+\pause %%%%%%%%%%%%%%%%%% --- PAUSE --- %%%%%%%%%%%%%%%%%%
+%\[ \mathfrak M, h, w \Omodels \varphi  \qquad \textup{\begin{minipage}{8cm}``in the model $\mathfrak M$, in the world $w$ of history $h$, $\varphi$ is true''\end{minipage}}\]
+Let $\mathfrak M = (W, <, V)$ be a tree model.
+%\pause %%%%%%%%%%%%%%%%%% --- PAUSE --- %%%%%%%%%%%%%%%%%%
+\vspace{-1ex}\[\begin{tomb}[.15]{lcl}
+%\textup{Ockhamist:}\\
+   \mathfrak M , h, w \Omodels p &\defekv & w\in V(p)
+\\ \mathfrak M , h, w \Omodels \lnot \varphi &\defekv & \textup{ it is not true that }\mathfrak M , h, w \Omodels \varphi
+\\ \mathfrak M , h, w \Omodels \varphi \land \psi &\defekv & \mathfrak M , h, w \Omodels \varphi\textup{ and }\mathfrak M , h, w \Omodels \psi
+\\ \mathfrak M , h, w \Omodels \PD \varphi &\defekv & \exists v \big( v<w \land \mathfrak M , h, v \Omodels \varphi\big)
+\\ \mathfrak M , h, w \Omodels \FD \varphi &\defekv & \existsin v{\cemph{h}} \big( w<v \land \mathfrak M , h, v \Omodels \varphi\big)
+\\ \mathfrak M , h, w \Omodels \Diamond \varphi &\defekv & \existsp {h'\overset w\sim h} \; \mathfrak M , h', w \Omodels \varphi
+\end{tomb}\]
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% NEXT SLIDE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Training}
+\footnotesize
+\[\begin{tikzpicture}[world/.style={inner sep=.4mm, fill=black, circle},>=stealth, scale=.7]
+
+\begin{scope}[opacity=.2]
+%\fill[red]  plot[smooth, tension=.7] coordinates {(-2,-1) (-0.5,-0.5) (1,1.5) (2.5,1.5) (4,4.5) (2.5,4.5) (-1,2) (-2.5,-0.5) (-2,-1)};
+%\fill[green]  plot[smooth, tension=.7] coordinates {(-3.5,1.5) (3,1) (3.5,2.5) (0,3) (-1,4.5) (-4,4.5) (-3.5,1.5)};
+\fill[blue]  (0,-1) ellipse (3 and 1.5);
+\fill[red,rotate=45]  (2,0.5) ellipse (3.5 and 1.5);
+\fill[green, rotate=-35]  (-2,1.5) ellipse (3.5 and 2);
+\end{scope}
+\node[world] (v1) at (0,-2) {};
+\node[world] (v2) at (-1,0) {};
+\node[world] (v3) at (1,0) {};
+\node[world] (v4) at (-2,2) {};
+\node[world] (v5) at (0,2) {};
+\node[world] (v6) at (-3,4) {};
+\node[world] (v9) at (2,2) {};
+\node[world] (v10) at (1,4) {};
+\node[world] (v11) at (3,4) {};
+\node[world] (v8) at (0,4) {};
+\node[world] (v7) at (-1,4) {};
+\draw[->]  (v1) edge (v2);
+\draw[->]  (v1) edge (v3);
+\draw[->]  (v2) edge (v4);
+\draw[->]  (v2) edge (v5);
+\draw[->]  (v4) edge (v6);
+\draw[->]  (v4) edge (v7);
+\draw[->]  (v5) edge (v8);
+\draw[->]  (v3) edge (v9);
+\draw[->]  (v9) edge (v10);
+\draw[->]  (v9) edge (v11);
+
+
+
+\begin{scope}[line width=3, opacity=.5]
+\draw[red]    plot[smooth, tension=1] coordinates {(v1) (v2) (v4) (v6)};
+\draw[blue]   plot[smooth, tension=1] coordinates {(v1) (v2) (v4) (v7)};
+\draw[green]  plot[smooth, tension=1] coordinates {(v1) (v2) (v5) (v8)};
+\draw[orange] plot[smooth, tension=1] coordinates {(v1) (v3) (v9) (v10)};
+\draw[violet] plot[smooth, tension=1] coordinates {(v1) (v3) (v9) (v11)};
+\end{scope}
+\begin{scope}[anchor=south]
+\node[red] at (v6) {$h_1$};
+\node[blue] at (v7) {$h_2$};
+\node[green] at (v8) {$h_3$};
+\node[orange] at (v10) {$h_4$};
+\node[violet] at (v11) {$h_5$};
+\end{scope}
+
+\node[anchor=east] at (v4){$w_4$};
+\node[anchor=east] at (v5){$w_5$};
+\node[anchor=east] at (v9){$w_6$};
+\node[anchor=east] at (v2){$w_2$};
+\node[anchor=east] at (v3){$w_3$};
+\node[anchor=east] at (v1){$w_1$};
+\node[anchor=east] at (v6){$w_7$};
+\node[anchor=east] at (v7){$w_8$};
+\node[anchor=east] at (v8){$w_9$};
+\node[anchor=east] at (v10){$w_{10}$};
+\node[anchor=east] at (v11){$w_{11}$};
+
+\node[green] at (-3,5.5) {$V(p)$};
+\node[red] at (2.5,5) {$V(q)$};
+\node[blue] at (-3,0) {$V(r)$};
+\end{tikzpicture}\]
+
+%\uncover<11->{
+%$\mathfrak M, w \Pmodels \lnot \FD \lnot \varphi$ is true iff you can find a history of $w$ which evades $\lnot \varphi$, i.e., in which $\varphi$ is always true above $w$.}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% NEXT SLIDE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+	\frametitle{\large Ockhamist ``will''}
+\footnotesize
+
+{\large
+\[ (\FD \varphi \land \FD \psi)\, \lthen \, \big[ \FD(\varphi \land \FD \psi) \lor \FD(\varphi \land \psi) \lor \FD(\FD \varphi \land \psi)\big] \quad ? \]
+}
+
+is valid because outside of $\varphi$ and $\psi$ there are no $\Diamond$-s, so once the meaning of $\varphi$ and $\psi$ is given, the meaning of the formula above is evaluated on a given history, which is a linear order of moments.
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% NEXT SLIDE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\szakasz[Peirceanism]{Peircean future}
+
+\begin{frame}
+	\frametitle{Peircean future}
+\scriptsize
+
+\begin{center}
+\begin{minipage}{.9\textwidth}
+From the Peircean point of view, [\dots] ``$\varphi$ will happen'' is short for ``$\varphi$ will happen, no
+matter what possible future of $w$ is considered'', which is true just in case every
+possible future of $w$ contains a moment at which $\varphi$ is true.
+\end{minipage}
+\end{center}
+\hfill \textsc{Zanardo 1996} (about \textsc{Prior 1967})
+
+\begin{center}
+\cemph{So even if we use the histories to give the semantics of $\FD$, we do not relativize the truth of formulas to certain histories. Truth of a temporal statement is history-independent.}
+\end{center}
+
+\medskip
+
+A set of worlds $X$ \emph{bars} $w$ iff every history containing $w$ goes through $X$:
+
+\includegraphics[scale=.02]{sorompo.jpg}
+\qquad \raisebox{.3cm}{$\textup{$X$ bars $w$} \defekv \forallin h {\mathrm{H}({\mathfrak F})} (w\in h \lthen h\cap X\neq \varnothing) $}
+
+Let $\mathfrak M = (W, <, V)$ be a tree model.
+\\ $
+\begin{tomb}[.15]{lcl}
+\mathfrak M , w \Pmodels p &\defekv & w\in V(p)
+\\ \mathfrak M , w \Pmodels \lnot \varphi &\defekv & \textup{ it is not true that }\mathfrak M , w \Pmodels \varphi
+\\ \mathfrak M , w \Pmodels \varphi \land \psi &\defekv & \mathfrak M , w \Pmodels \varphi\textup{ and }\mathfrak M , w \Pmodels \psi
+\\ \mathfrak M , w \Pmodels \PD \varphi &\defekv & \exists v \big( v<w \land \mathfrak M , v \Pmodels \varphi\big)
+\\ \mathfrak M , w \Pmodels \FD \varphi &\defekv & %\forallin h{\mathrm{Hist}_{\mathfrak F}(w)} \existsin v{h} \big( w<v \land \mathfrak M , v \Pmodels \varphi\big)
+%\\  &\Leftrightarrow &
+\wintension[M]{\mathrm{\bemph P}}{\varphi} \textup{ bars } w
+\end{tomb}
+$
+
+where $\wintension[M]{\mathrm{\bemph P}}{\varphi}\defegy \{w \, :\, \mathfrak M, w \Pmodels \varphi\}$, i.e, \\ the set of those worlds in which $\varphi$ is true.
+
+\felirat{1.5}{1}{.6}{3.7}{-2.7}{
+\begin{tikzpicture}[world/.style={inner sep=.4mm, fill=black, circle},>=stealth, scale=.7]
+\filldraw[rotate=-30, fill opacity=.1]  (-3,1.5) ellipse (2.7 and 1.1);
+\node at (-2.5,4.5) {$X$};
+\node[world] (v1) at (0,-2) {};
+\node[world] (v2) at (-1,0) {};
+\node[world] (v3) at (1,0) {};
+\node[world] (v4) at (-2,2) {};
+\node[world] (v5) at (0,2) {};
+\node[world] (v6) at (-3,4) {};
+\node[world] (v9) at (2,2) {};
+\node[world] (v10) at (1,4) {};
+\node[world] (v11) at (3,4) {};
+\node[world] (v8) at (0,4) {};
+\node[world] (v7) at (-1,4) {};
+\draw[->]  (v1) edge (v2);
+\draw[->]  (v1) edge (v3);
+\draw[->]  (v2) edge (v4);
+\draw[->]  (v2) edge (v5);
+\draw[->]  (v4) edge (v6);
+\draw[->]  (v4) edge (v7);
+\draw[->]  (v5) edge (v8);
+\draw[->]  (v3) edge (v9);
+\draw[->]  (v9) edge (v10);
+\draw[->]  (v9) edge (v11);
+\begin{scope}[anchor=east]
+\node at (v1){$w$};
+\node at (v2){$v$};
+\node at (v4){$u$};
+\end{scope}
+\node[draw=black, rounded corners = 3] at (4,-0.5) {$\begin{array}{l}
+X \textup{ does not bar }w
+\\ X \textup{ bars }v
+\\ X \textup{ does not bar }u
+\end{array}$};
+\end{tikzpicture}}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% NEXT SLIDE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+	\frametitle{Training}
+\footnotesize
+\[\begin{tikzpicture}[world/.style={inner sep=.4mm, fill=black, circle},>=stealth, scale=.7]
+
+\begin{scope}[opacity=.2]
+%\fill[red]  plot[smooth, tension=.7] coordinates {(-2,-1) (-0.5,-0.5) (1,1.5) (2.5,1.5) (4,4.5) (2.5,4.5) (-1,2) (-2.5,-0.5) (-2,-1)};
+%\fill[green]  plot[smooth, tension=.7] coordinates {(-3.5,1.5) (3,1) (3.5,2.5) (0,3) (-1,4.5) (-4,4.5) (-3.5,1.5)};
+\fill[blue]  (0,-1) ellipse (3 and 1.5);
+\fill[red,rotate=45]  (2,0.5) ellipse (3.5 and 1.5);
+\fill[green, rotate=-35]  (-2,1.5) ellipse (3.5 and 2);
+\end{scope}
+\node[world] (v1) at (0,-2) {};
+\node[world] (v2) at (-1,0) {};
+\node[world] (v3) at (1,0) {};
+\node[world] (v4) at (-2,2) {};
+\node[world] (v5) at (0,2) {};
+\node[world] (v6) at (-3,4) {};
+\node[world] (v9) at (2,2) {};
+\node[world] (v10) at (1,4) {};
+\node[world] (v11) at (3,4) {};
+\node[world] (v8) at (0,4) {};
+\node[world] (v7) at (-1,4) {};
+\draw[->]  (v1) edge (v2);
+\draw[->]  (v1) edge (v3);
+\draw[->]  (v2) edge (v4);
+\draw[->]  (v2) edge (v5);
+\draw[->]  (v4) edge (v6);
+\draw[->]  (v4) edge (v7);
+\draw[->]  (v5) edge (v8);
+\draw[->]  (v3) edge (v9);
+\draw[->]  (v9) edge (v10);
+\draw[->]  (v9) edge (v11);
+
+
+
+\begin{scope}[line width=3, opacity=.5]
+\draw[red]    plot[smooth, tension=1] coordinates {(v1) (v2) (v4) (v6)};
+\draw[blue]   plot[smooth, tension=1] coordinates {(v1) (v2) (v4) (v7)};
+\draw[green]  plot[smooth, tension=1] coordinates {(v1) (v2) (v5) (v8)};
+\draw[orange] plot[smooth, tension=1] coordinates {(v1) (v3) (v9) (v10)};
+\draw[violet] plot[smooth, tension=1] coordinates {(v1) (v3) (v9) (v11)};
+\end{scope}
+\begin{scope}[anchor=south]
+\node[red] at (v6) {$h_1$};
+\node[blue] at (v7) {$h_2$};
+\node[green] at (v8) {$h_3$};
+\node[orange] at (v10) {$h_4$};
+\node[violet] at (v11) {$h_5$};
+\end{scope}
+
+\node[anchor=east] at (v4){$w_4$};
+\node[anchor=east] at (v5){$w_5$};
+\node[anchor=east] at (v9){$w_6$};
+\node[anchor=east] at (v2){$w_2$};
+\node[anchor=east] at (v3){$w_3$};
+\node[anchor=east] at (v1){$w_1$};
+\node[anchor=east] at (v6){$w_7$};
+\node[anchor=east] at (v7){$w_8$};
+\node[anchor=east] at (v8){$w_9$};
+\node[anchor=east] at (v10){$w_{10}$};
+\node[anchor=east] at (v11){$w_{11}$};
+
+%\node[anchor=west] at (3.5,1) {$\begin{array}{c|c}
+%\mathfrak M , h_1, w_4\Omodels \FB \textcolor{green}{p} & \pause %%%%%%%%%%%%%%%%%% --- PAUSE --- %%%%%%%%%%%%%%%%%% \textup{true}
+%\\ \mathfrak M , h_1, w_2\Omodels \FB \textcolor{green}{p} & \pause %%%%%%%%%%%%%%%%%% --- PAUSE --- %%%%%%%%%%%%%%%%%%\textup{true}
+%\\ \mathfrak M , h_1, w_2\Omodels \FB \lnot \textcolor{red}{q} & \pause %%%%%%%%%%%%%%%%%% --- PAUSE --- %%%%%%%%%%%%%%%%%%\textup{true}
+%\\ \mathfrak M , ?, w_6\Omodels \FB \textcolor{red}{q} & \pause %%%%%%%%%%%%%%%%%% --- PAUSE --- %%%%%%%%%%%%%%%%%% h_5
+%\\ \mathfrak M , w_6\Pmodels \FB \textcolor{red}{q} & \pause %%%%%%%%%%%%%%%%%% --- PAUSE --- %%%%%%%%%%%%%%%%%%\textup{false}
+%\\ \mathfrak M , w_1 \Pmodels \FD \textcolor{green}{p} & \pause %%%%%%%%%%%%%%%%%% --- PAUSE --- %%%%%%%%%%%%%%%%%%\textup{true}
+%\\ \mathfrak M , h_5, w_1 \Omodels \Box \FD \textcolor{blue}{r} & \pause %%%%%%%%%%%%%%%%%% --- PAUSE --- %%%%%%%%%%%%%%%%%%\textup{true}
+%\\ \mathfrak M , h_5, w_1 \Omodels \Box \FB \textcolor{blue}{r} & \pause %%%%%%%%%%%%%%%%%% --- PAUSE --- %%%%%%%%%%%%%%%%%%\textup{false}
+%\\ \mathfrak M , h_5, w_1 \Omodels \Diamond \FB \textcolor{blue}{r} & \pause %%%%%%%%%%%%%%%%%% --- PAUSE --- %%%%%%%%%%%%%%%%%%\textup{false}
+%\\ \mathfrak M , w_1 \Pmodels \lnot \FD \lnot \textcolor{red}{q} & \pause %%%%%%%%%%%%%%%%%% --- PAUSE --- %%%%%%%%%%%%%%%%%%\textup{true}(!!)
+%\end{array}$};
+
+\node[green] at (-3,5.5) {$V(p)$};
+\node[red] at (2.5,5) {$V(q)$};
+\node[blue] at (-3,0) {$V(r)$};
+\end{tikzpicture}\]
+
+%\uncover<11->{
+%$\mathfrak M, w \Pmodels \lnot \FD \lnot \varphi$ is true iff you can find a history of $w$ which evades $\lnot \varphi$, i.e., in which $\varphi$ is always true above $w$.}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% NEXT SLIDE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+	\frametitle{\large Peircean ``will''}
+\footnotesize
+
+{\large
+\[ (\FD \varphi \land \FD \psi)\, \lthen \, \big[ \FD(\varphi \land \FD \psi) \lor \FD(\varphi \land \psi) \lor \FD(\FD \varphi \land \psi)\big] \quad ? \]
+}
+
+is invalid; let $\mathfrak M$ be the following ``twin lines''-model:
+\[
+\begin{tikzpicture}[>=stealth, scale=.7,
+world/.style={inner sep=.4mm, fill=black, circle},
+intension/.style={fill=black, fill opacity=.1},
+altrel/.style={->}]
+\node [world] (v1) at (0,0) {};
+
+\node [world] (v2) at (-1,1) {};
+\node [world] (v3) at (1,1) {};
+\node [world] (v4) at (-2,2) {};
+\node [world] (v5) at (2,2) {};
+\node [world] (v6) at (-3,3) {};
+\node [world] (v7) at (3,3) {};
+\node (v8) at (-4,4) {};
+\node (v9) at (4,4) {};
+\draw [altrel] (v1) edge (v2);
+\draw [altrel] (v1) edge (v3);
+\draw [altrel] (v2) edge (v4);
+\draw [altrel] (v3) edge (v5);
+\draw [altrel] (v4) edge (v6);
+\draw [altrel] (v5) edge (v7);
+\draw [dotted] (v6) edge (v8);
+\draw [dotted] (v7) edge (v9);
+\fill [intension, rotate=30] (2.4,1.2) ellipse (4 and .7);
+\fill [intension, rotate=150] (2,-1.2) ellipse (4 and .7);
+\node at (-3.2,4.2) {$V(p)$};
+\node at (2.8,4.2) {$V(q)$};
+\node[anchor=north] at (v1){$w$};
+\node[anchor=east] at (v2){$v_1$};
+\node[anchor=west] at (v3){$u_1$};
+\node[anchor=east] at (v4){$v_2$};
+\node[anchor=west] at (v5){$u_2$};
+\node[anchor=east] at (v6){$v_3$};
+\node[anchor=west] at (v7){$u_3$};
+\end{tikzpicture}\]
+
+\pause %%%%%%%%%%%%%%%%%% --- PAUSE --- %%%%%%%%%%%%%%%%%% \textup{true}
+   $V(p)$ and $V(q)$ bars $w$, so $\mathfrak M, w \Pmodels \FD p \land \FD q$
+\pause %%%%%%%%%%%%%%%%%% --- PAUSE --- %%%%%%%%%%%%%%%%%% \textup{true}
+\\ $V(p)\cap V(q)= \varnothing$, and $\varnothing$ bars nothing, so $\mathfrak M, w \not\Pmodels \FD (p \land  q)$
+\pause %%%%%%%%%%%%%%%%%% --- PAUSE --- %%%%%%%%%%%%%%%%%% \textup{true}
+\\ $\wintension[M]{\bemph{P}}{\FD p} = \{w\}\cup \{ v_i \, : \, i\in \mathbb N \}$ \quad  $\wintension[M]{\bemph{P}}{\FD q} = \{w\}\cup \{ u_i \, : \, i\in \mathbb N \}$
+\pause %%%%%%%%%%%%%%%%%% --- PAUSE --- %%%%%%%%%%%%%%%%%% \textup{true}
+\\ $\wintension[M]{\bemph{P}}{\FD p}\cap V(q) = \{v_1\}$ \quad  $\wintension[M]{\bemph{P}}{\FD q}\cap V(p) = \{u_1\}$
+\pause %%%%%%%%%%%%%%%%%% --- PAUSE --- %%%%%%%%%%%%%%%%%% \textup{true}
+\\ But neither of these bars $w$, so $\mathfrak M, w \not\Pmodels \FD (\FD p \land  q)$ and $\mathfrak M, w \not\Pmodels \FD (p \land \FD  q)$
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% NEXT SLIDE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[t]
+	\frametitle{``Always going to be \dots''}
+Let $p$ represent the sentence ``The 3rd World War is on.''
+
+How should we formalize the statement ``There won't be a 3rd World War.''?
+
+\pause %%%%%%%%% PAUSE %%%%%%%%%%%%
+
+\begin{itemize}
+\item $\lnot \FD p $
+\pause %%%%%%%%% PAUSE %%%%%%%%%%%%
+\item $\FD \lnot p $
+\end{itemize}
+
+\pause %%%%%%%%% PAUSE %%%%%%%%%%%%
+\hrule
+
+\begin{itemize}
+\item $\lnot \FD p $ says that $V(p)$ does not bar `us'. So there is an `escape' history in which the 3rd World War won't break out
+\pause %%%%%%%%% PAUSE %%%%%%%%%%%%
+\item $\FD \lnot p $ says that $W-V(p)$ bar `us'. So no matter what happens, there will be moments in the future when there is no 3rd World War.
+\end{itemize}
+
+\pause
+
+None of the above is correct, because the first is speaking about \cemph{only some} `escape'-history, and the second talks about \cemph{only some} moments in the future in which there is no 3rd World war. The reason of course is that we interpret $\FD$ with a $\forall\exists$-way, and no matter how we negate it, the mixed nature of it will survive.
+
+\bigskip
+
+If we want to formalize the `won't-s, and ``always going to be''-s, we need the old history-independent strong future operator for that purpose:
+
+\[\begin{tomb}[.15]{lcl}
+\mathfrak M , w \Pmodels \FB \varphi &\defekv & \forall v \big( w<v \land \mathfrak M , v \Pmodels \varphi\big)
+\end{tomb}\]
+
+\end{frame}
+
+\szakasz[Truth-value gaps]{Hard indeterminism}
+
+\begin{frame}
+	\frametitle{Future Contingents}
+\footnotesize
+
+\bigskip
+
+\begin{minipage}{.7\textwidth}
+Consider the tree on the right.
+Let $p$ represent the sentence ``There is a sea battle''.
+Suppose that $w$ is today, and $w_1$ and $w_2$ are the two possible tomorrows.
+We have that $w \models \FD p \land \FD \lnot p$, therefore, %what does $\FD p$ mean?
+\end{minipage}
+
+
+\felirat{1.5}{1}{1}{4}{2.5}{
+\begin{tikzpicture}[world/.style={inner sep=.4mm, fill=black, circle},>=stealth, scale=.7]
+\node[world] (v1) at (0,-2) {};
+\node[world] (v2) at (-1,0) {};
+\node[world] (v3) at (1,0) {};
+\node[anchor=south] at (v2) {$w_1\Vdash p$};
+\node[anchor=south] at (v3) {$w_2\Vdash \lnot p$};
+\node[anchor=north] at (v1) {$w$};
+\draw[->]  (v1) edge (v2);
+\draw[->]  (v1) edge (v3);
+\end{tikzpicture}
+}
+
+
+\pause %%%%%%%%%%%%%%%%%% --- PAUSE --- %%%%%%%%%%%%%%%%%%
+
+\bigskip
+
+\begin{itemize}
+\item $\FD p$ is true iff $V(p)$ bars the moment of utterance. (standard Peircean)
+\pause %%%%%%%%%%%%%%%%%% --- PAUSE --- %%%%%%%%%%%%%%%%%%
+\item $\FD p$ is false iff $V(\lnot p)$ bars the moment of utterance. (That is strict!!!)
+\end{itemize}
+
+\pause %%%%%%%%%%%%%%%%%% --- PAUSE --- %%%%%%%%%%%%%%%%%%
+\cemph{Partial semantics:} What if neither of them bar the moment of utterance? 
+\bigskip
+
+\pause %%%%%%%%%%%%%%%%%% --- PAUSE --- %%%%%%%%%%%%%%%%%%
+Then $\FD p$ is \cemph{undefined} in the moment of utterance. 
+
+\end{frame}
+
+\end{document}

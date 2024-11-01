@@ -1,0 +1,6 @@
+\beamer@endinputifotherversion {3.27pt}
+\beamer@sectionintoc {1}{HF}{1}{0}{1}
+\beamer@sectionintoc {2}{Ockhamist axioms}{2}{0}{2}
+\beamer@sectionintoc {3}{Irreflexivity}{9}{0}{3}
+\beamer@sectionintoc {4}{Irr. can. submodel}{25}{0}{4}
+\beamer@sectionintoc {5}{Logics}{40}{0}{5}

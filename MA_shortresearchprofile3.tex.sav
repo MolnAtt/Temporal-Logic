@@ -1,0 +1,77 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+%\usepackage[magyar]{babel}
+\usepackage[english]{babel} % ez van az MA60-ban
+%\usepackage{amsfonts}
+%\usepackage[sc]{mathpazo} \linespread{1.05}         % Palatino needs more leading (space between lines)
+%\usepackage[uppercase=upright,charter]{mathdesign}
+
+%\usepackage{rotating}
+%\usepackage{csquotes}
+\usepackage{ifthen}
+\usepackage{amssymb}
+\usepackage{amsmath}
+%\usepackage{amsthm}
+%\usepackage[margin=1cm]{geometry}
+\usepackage{cite}
+%\usepackage{biblatex} % az elsődleges és másodlagos bibliográfiák miatt (refsections)
+%\usepackage[style=magyar,natbib=true,babel=other]{biblatex} % ez van az MA60-ban
+\usepackage{tikz}
+\usepgflibrary{arrows}
+\frenchspacing
+\title{Research plans}
+\author{Attila Moln\'ar}
+
+\newcommand{\vonal} [1][.2]{\hspace{#1cm} | \hspace{#1cm}}
+\newcommand{\defegy}{\overset{\textup{\tiny def}}{=}}
+\newcommand{\defekv}{\overset{\textup{\tiny def}}{ \Leftrightarrow }}
+\newcommand{\lthen}{\rightarrow}
+\newcommand{\lminus}{-}
+\newcommand{\liff}{\leftrightarrow}
+\newcommand{\forallin}[2]{(\forall #1 \in #2)}
+\newcommand{\existsin}[2]{(\exists #1 \in #2)}
+\newcommand{\forallp}[1]{(\forall #1)}
+\newcommand{\existsp}[1]{(\exists #1)}
+\newcommand{\points}[1][0]{\hspace{#1ex}\hspace{-.5ex}:\hspace{-.5ex}\hspace{#1ex}}
+
+\begin{document}
+\pagestyle{empty}
+\maketitle
+\thispagestyle{empty}
+
+My primary research area is on \emph{modal} logical foundation of relativity theories. 
+The main current researches of mine are based on the following result; in cooperation with Gergely Sz\'ekely, we gave an axiom system in \emph{first-order temporal logic} that has the following properties:
+\begin{enumerate}
+\item \textbf{Strong Expressive Power:} It can express the basic paradigmatic relativistic effects of kinematics such as time dilation, length contraction, twin paradox, etc.
+\item \textbf{Operationality:} The coordinatization itself is definable using \emph{metric tense operators} with \emph{signalling procedures}. These operators refers to inertial agents drifting in space who make signalling experiments to discover what spacetime they live in. Their knowledge about their wordlines, their causal pasts, and pasts are also representable in that language.
+\item \textbf{Completeness and Decidability:} The set of formulas that are valid on the 4D Minkowski spacetime is recursively axiomatizable and decidable.
+\item \textbf{Formally compared with \textsf{SpecRel}:} A (first-order modal variant of a) definitional equivalence can be proved w.r.t. the axiom system \textsf{SpecRel$\cup$Comp} of \cite{logst}.
+\end{enumerate}
+The first-order temporal logic in question is a 2-sorted language: One of the sorts is for mathematics with terms $\tau ::= x\vonal \tau+\tau' \vonal \tau \cdot \tau'$. 
+These terms refers to numbers that can be found in the one and only \emph{universal domain} that is shared by all the possible worlds in the model.
+As it is standard in the propositional approaches (\cite{Goldblatt1980}, Shapirovski, Shehtman, etc.), the worlds are considered to be events, and a world $e'$ is an alternative of $e$ iff they are different and a light signal or a slower-than-light signal can be sent from $e$ to $e'$.
+
+The other sort is for the so-called \emph{clock variables} $a_1, a_2, \dots$. These are intended to be intensional objects (non-rigid designators, individual concepts). The denotation of a clock variable is, if there is any, a number, but this denotation can vary from world to world. The intension of a clock variable is will be a timelike line on the Minkowski spacetime.
+The formulas of that language are 
+\[\varphi ::=\, \,  \tau_1 \leq \tau_2 \vonal \tau_1 = \tau_2 \vonal a\points \tau\vonal  \lnot \varphi \vonal \varphi\land \psi \vonal \mathbf F \varphi \vonal \mathbf P \varphi \vonal \exists x \varphi\vonal \exists a \varphi \]
+Here the mathematical primitive formulas are equalities $\tau=\tau'$ and inequalities $\tau\leq \tau'$, while all the only non-mathematical primitive formulas are of the form $a:\tau$ which represents the statement ``the clock $a$ shows the time $\tau$''. We use the standard boolean connectives, the temporal operators $\mathbf P$ and $\mathbf F$ to quantify over causal past and future events, the classical (global) quantification over the numbers, and the so-called \emph{actualist quantification over clocks}, i.e., in every world, we can only quantify over those set of clocks that are present there in the sense that they have a denotation in that world. In this language, the clock-relativized temporal operators are easily definable, e.g., the worldline-past is just
+ \[\PB_a \varphi \defekv \PB(\exists x\, a\points x \lthen \varphi) \hfill \textup{Everywhere in the causal past \emph{where $\pi$ occurred.}}\]
+Therefore this system at the same time is a multi-agent system in which a restricted quantification over agents is also possible. 
+
+Using these powerful, yet local and operational tools an axiomatization of the causal structure of Minkowski spacetimes with timelike lines can be given in way that the resulting logic is decidable. I intend to use this result as a base for the following researches:
+\begin{itemize}
+\item \textbf{Acceleration:} Allow clock-variables to denote timelike \emph{curves} instead of timelike lines, and approach kinematics of accelerating objects in Minkowski and locally Minkowski spacetimes, and compare the resulting systems to \textsf{AccRel} and \textsf{GenRel}. The novel of that approach is that in this language, contrary to the other operational approaches (Ax, ESzabo, Compairing), it is easy to differentiate between inertial and non-inertial objects: In the spirit of twin paradox, we can say that inertial observers are those who have the fastest clocks:
+    \[ \mathrm{Inertial}(a) \defekv \forall b,\!x,\! y,\!x'\!,\!y'(\mathbf P (a\points x \land b\points y) \land a\points x' \land b\points y' \lthen |x-x'|\geq |y-y'|)   \]
+\item \textbf{Building Logics:} It can be shown that it is possible to extend this theory with propositional variables in a way that strong completeness of the modal predicate logic remains provable (the proof itself is a modification of the canonical model method that can be found in \cite{Goldblatt2011}). Such an extension would turn that first-order temporal \emph{theory} into an even more expressive \emph{logic}, which allows this theory to be general relativistic background theory to investigate quantum physical phenomena operationally. Two concrete applications:
+\begin{itemize}
+\item \textbf{Branching spacetimes:} We can axiomatize Minkowski Branching Spacetimes, including Belnap-branchings using an Ockhamist approach. It can be showed that we can form nominals for histories (similarly to the non-relativistic \cite{BlackburnHybridOckhamist}) and variables for causal chains from propositional variables, which makes Belnap's \cite{Belnap} Prior Choice Principle possible to be formalized.
+\item \textbf{Operational definition of mass} can be give using counterfactual the scenarios provided by branching spacetimes in the way we done in \cite{MSz2014}: we can define mass-standard objects and postulates only about possible and actual colliding experiments.
+\end{itemize}
+\item \textbf{Connecting approaches} The previous examples points to the fact that of extensions of these system can be good candidates to build a bridge between the modal approaches of physics and the research led by H.~Andréka and I.~Németi.
+\end{itemize}
+
+\bibliography{ModLogRelBib}{}
+\bibliographystyle{plain}
+
+\end{document} 
